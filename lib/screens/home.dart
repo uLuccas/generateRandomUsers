@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:generate_users/models/randon_user_models.dart';
 import 'package:generate_users/screens/details_user.dart';
 import 'package:generate_users/services/random_user_service.dart';
+import 'package:generate_users/utils/styles_text.dart';
 // import 'package:generate_users/widgets/card_user.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("search User"),
+        title: const Text("Random User"),
       ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -35,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Card(
               shape: const RoundedRectangleBorder(
                 side: BorderSide(
-                  color: Colors.green,
+                  color: Colors.black,
                 ),
                 borderRadius: BorderRadius.all(
                   Radius.circular(12),
@@ -65,8 +66,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         : ListTile(
                             leading: Image.network(
                                 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'),
-                            title: const Text('Luccas o brabo'),
-                            subtitle: const Text('luccas.brabo@email.com'),
+                            title: Text(
+                              'Luccas o brabo',
+                              style: Styles.title,
+                            ),
+                            subtitle: Text(
+                              'luccas.brabo@email.com',
+                              style: Styles.subtitle,
+                            ),
                           ),
                   ),
                 ],

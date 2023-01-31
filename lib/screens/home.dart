@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:generate_users/models/randon_user_models.dart';
+import 'package:generate_users/screens/details_user.dart';
 import 'package:generate_users/services/random_user_service.dart';
-import 'package:generate_users/widgets/card_user.dart';
+// import 'package:generate_users/widgets/card_user.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -47,6 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(8),
                     child: data != null
                         ? ListTile(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                return DetailsUser(data: data);
+                              }));
+                            },
                             leading: CircleAvatar(
                               backgroundImage: NetworkImage(
                                 data!.results[0].picture.thumbnail,

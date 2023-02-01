@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:generate_users/models/randon_user_models.dart';
 import 'package:generate_users/screens/details_user.dart';
+import 'package:generate_users/screens/history_users.dart';
+import 'package:generate_users/services/list_user_service.dart';
 import 'package:generate_users/services/random_user_service.dart';
 import 'package:generate_users/utils/styles_text.dart';
 // import 'package:generate_users/widgets/card_user.dart';
@@ -15,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   RandomUser? data;
+  ListUsers? listUsers = ListUsers(arrUser: []);
 
   void handleGetRandomUser() async {
     final response = await getRandomUser();
@@ -50,6 +53,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: data != null
                         ? ListTile(
                             onTap: () {
+                              if (data != null) {
+                                listUsers?.addUser(data!);
+
+                                var teste =
+                                    listUsers?.getUsers()[0].results[0].email;
+                                print(teste);
+                              }
+
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (BuildContext context) {
                                 return DetailsUser(data: data);
@@ -82,7 +93,19 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const Gap(20),
           ElevatedButton(
-            onPressed: () => handleGetRandomUser(),
+            onPressed: () => {
+              handleGetRandomUser(),
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (BuildContext context) {
+                var teste = listUsers?.getUsers();
+                return HistoryUsers(
+                  listUsers: teste,
+                );
+                // return HistoryUsers(
+                //   listUsers: teste,
+                // );
+              }))
+            },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(16),
               shape: const StadiumBorder(),
